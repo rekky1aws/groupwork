@@ -1,7 +1,5 @@
 console.log("wordcloud.js")
 
-console.log(words);
-
 const container = document.querySelector('.wordcloud');
 
 function getHighestWeight (words) {
@@ -14,13 +12,26 @@ function getHighestWeight (words) {
 	return highest;
 }
 
-const maxWeight =  getHighestWeight(words);
+async function displayWordCloud ()
+{
+	const words = await getWords();
+	console.log(words);
+	const wordsKeys = await Object.keys(words)
+	console.log(wordsKeys);
 
-Object.keys(words).forEach((element) => {
-	let a = document.createElement('a');
-	a.textContent = element;
-	a.href = "/categories?name=" + element;
-	a.style.fontSize = words[element] + 'em';
-	a.style.opacity = 0.5 + 0.5 * (words[element] / maxWeight);
-	container.appendChild(a);
-});
+	const maxWeight =  getHighestWeight(words);
+
+
+	Object.keys(words).forEach((element) => {
+		let a = document.createElement('a');
+		a.textContent = element;
+		a.href = "/categories?name=" + element;
+		a.style.fontSize = words[element] + 'em';
+		a.style.opacity = 0.5 + 0.5 * (words[element] / maxWeight);
+		console.log(a);	
+		container.appendChild(a);
+	});
+
+}
+
+displayWordCloud();
