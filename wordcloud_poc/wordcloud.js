@@ -19,7 +19,7 @@ const maxWeight =  getHighestWeight(words);
 Object.keys(words).forEach((element) => {
 	let a = document.createElement('a');
 	a.textContent = element;
-	a.href = "/categories/" + element;
+	a.href = "/categories?name=" + element;
 	a.style.fontSize = words[element] + 'em';
 	a.style.opacity = 0.5 + 0.5 * (words[element] / maxWeight);
 	container.appendChild(a);
