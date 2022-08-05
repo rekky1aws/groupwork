@@ -1,5 +1,3 @@
-console.log("wordcloud.js")
-
 const container = document.querySelector('.wordcloud');
 
 function getHighestWeight (words) {
@@ -12,24 +10,25 @@ function getHighestWeight (words) {
 	return highest;
 }
 
-async function displayWordCloud ()
+function getFrequencies (words)
 {
-	// On récupère les mots grace a la fonction prévue dans words.js.
-	const words = await getWords();
-	console.log(words);
-	// On récupère toutes les clés de words, donc les noms des catégories
-		// C'est ici que les choses ne se passent plus comme je prévoyais...
-		// Question de temporalité, à mon humble avis, words n'a pas eu le temps d'avoir récupéré ses valeurs.
-		// Object.keys retourne un tableau vide.
-	const wordsKeys = Object.keys(words)
-	console.log(wordsKeys);
+	let wordFrequencies = [];
+	words.forEach( (word) => {
+		wordFrequencies[word.name] = word.articles.length
+	});
+	return wordFrequencies;
+}
+
+function displayWordCloud (wordFrequencies) {
+	//const wordsKeys = Object.keys(wordFrequencies);
+	//console.log(wordsKeys);
 
 	// On récupère la catégorie qui apparait le plus souvent.
-	const maxWeight =  getHighestWeight(words);
+	const maxWeight =  getHighestWeight(wordFrequencies);
 
 	// Ensuite pour chaque categories, on l'affiche dans le nuage de mot, plus il y a d'articles qui y sont liés, plus elle apparait grande et vive.
 	// A l'inverse, si moins d'artcile sont liés à une catégorie, le nom de celle-ci apparait en plus petit et d'une couleur moins saturée.
-	Object.keys(words).forEach((element) => {
+	Object.keys(wordFrequencies).forEach((element) => {
 		// On crée la balise <a></a> qui correspond.
 		let a = document.createElement('a');
 
@@ -40,13 +39,20 @@ async function displayWordCloud ()
 		a.href = "/categories?name=" + element;
 
 		// On change la taille et l'opacité en fonction du nombre d'articles.
-		a.style.fontSize = words[element] + 'em';
-		a.style.opacity = 0.5 + 0.5 * (words[element] / maxWeight);
+		a.style.fontSize = 1 + (wordFrequencies[element] / maxWeight) * 2 + 'em';
+		a.style.opacity = 0.5 + 0.5 * (wordFrequencies[element] / maxWeight);
 		
 		// On ajoute la balise à celle contenant le nuage de mots
 		container.appendChild(a);
 	});
-
 }
 
-displayWordCloud();
+function displayWords (words)
+{
+	const wordFrequencies = getFrequencies(words);
+	displayWordCloud(wordFrequencies);
+}
+
+const words = getCategories();
+
+words.then(displayWords);
