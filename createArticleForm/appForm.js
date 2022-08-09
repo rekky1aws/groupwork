@@ -4,6 +4,7 @@ const titleValue=document.getElementById('title')
 const bodyValue=document.getElementById('body')
 const categoryValue=document.getElementById('category-select')
 const writerValue=document.getElementById('writer')
+const dateValue=document.getElementById('dateSelect')
 let curentDate=new Date()
 console.log(curentDate)
 
@@ -75,10 +76,7 @@ const createArticle = function(event) {
         "tags":tagsArray,
         "category": "/api/categories/"+categoryValue.value,
         "writer":"/api/writers/1",
-        "publishedAt":curentDate
-        
-        
-
+        "publishedAt":dateValue.value,
     };
     console.log(typeof(categoryValue.value))
     fetch("https://127.0.0.1:8000/api/articles", {
