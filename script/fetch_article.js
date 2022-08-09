@@ -24,6 +24,7 @@ fetch(myJSON)
           <p class="mb-2 text-xl font-bold tracking-tight text-white">Titre : ${articlesJSON["hydra:member"][i].title}</p>
           </div>`;
       }
+      console.log(articlesJSON["hydra:member"])
     }
     sortArticles20();
   });
