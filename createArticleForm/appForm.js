@@ -1,16 +1,17 @@
 let tagId=2
 let tagsArray=[]
+const buttonTag = document.getElementById('newTag')
 const titleValue=document.getElementById('title')
 const bodyValue=document.getElementById('body')
 const categoryValue=document.getElementById('category-select')
 const writerValue=document.getElementById('writer')
 const dateValue=document.getElementById('dateSelect')
-let curentDate=new Date()
-console.log(curentDate)
 
+// appel d'api poour récuperer les tags
 async function GetTags(){
     const JsonResponse= await(fetch("https://127.0.0.1:8000/api/tags"))
     const response= await JsonResponse.json()
+// creàtion d'une boucle pour que chaque select contienne les tags
     for(let i=1; i<=tagId ; i++){
         console.log(i)
     response['hydra:member'].forEach(response=>{
@@ -23,6 +24,8 @@ async function GetTags(){
 }
 }
 GetTags()
+
+// appel d'api pour récuperer les catégorie et les injecter dans le select
 async function GetCategories(){
     const JsonResponse= await(fetch("https://127.0.0.1:8000/api/categories"))
     const response= await JsonResponse.json()
@@ -37,7 +40,7 @@ async function GetCategories(){
 GetCategories()
 
 
-const buttonTag = document.getElementById('newTag')
+// fuction pour créér un nouveau select et ajouter plus de deux tags
 function newTag(){
     let errorSection=document.getElementById('errorSection');
     let value1=document.getElementById('tags1').value
@@ -45,11 +48,13 @@ function newTag(){
         errorSection.innerHTML=''
     tagsArray.push(value1)
     tagsArray.push(value2)
+    // vérification des valeurs des deux premier id pour rappeler la regles des tags different
     if(value1==value2){
         tagsArray=[]
         errorSection.innerHTML='Erreur :Vous devez séléctionner des tags differents'
         errorSection.appendChild(errorMessage)
     }else{
+// création d'un nouveau select avec les options
         document.getElementById('errorSection').innerHTML=''
         tagId++
         let NewTag=document.createElement('select')
@@ -64,7 +69,7 @@ function newTag(){
 
 buttonTag.addEventListener("click",newTag)
 
-const createArticle = function(event) {
+const createArticle = async function(event) {
     tagsArray=[]
     for(let i=1;i<=tagId;i++){
         tagsArray.push("/api/tags/"+document.getElementById(`tags${i}`).value)
@@ -78,28 +83,28 @@ const createArticle = function(event) {
         "writer":"/api/writers/1",
         "publishedAt":dateValue.value,
     };
-    console.log(typeof(categoryValue.value))
-    fetch("https://127.0.0.1:8000/api/articles", {
+
+    const JSONResponse=await fetch("https://127.0.0.1:8000/api/articles", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
           },
         body: JSON.stringify(requestBody)
-    }).then(function (response) {
-        return response.json()
     })
-    .then(function (responseJSON) {
-        var resultDiv = document.createElement("div");
-        if (responseJSON["@type"] == "hydra:Error") {
-            console.log("Une erreur est survenue : " + responseJSON["hydra:description"])
-            resultDiv.innerHTML = "Une erreur est survenue";
+    const response= await JSONResponse.json()
+    
+    
+        var resultDiv = document.getElementById("resultMessage");
+        resultDiv.innerHTML=''
+        if (response["@type"] == "hydra:Error"||response["@type"] == "ConstraintViolationList") {
+            resultDiv.innerHTML = "Une erreur est survenue"+' '+ response["hydra:description"];
         }
         else {
-            console.log(responseJSON)
+            console.log(response)
             resultDiv.innerHTML = "Article créée";
         }
         document.body.appendChild(resultDiv);
-    })
+    
 }
 
 document.getElementById('create').addEventListener('click',createArticle)

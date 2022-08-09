@@ -6,3 +6,7 @@ textarea {
     width: 50em;
     height: 30em;
 }
+
+#newTag {
+    margin-bottom: 2em;
+}

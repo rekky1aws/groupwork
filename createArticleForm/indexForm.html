@@ -15,22 +15,25 @@
         <h1>Creation d'article</h1>
         <section id="creationSection">
             <label for="articleTitle">Titre de l'article</label>
+            <br>
             <input type="text" name="" id="title">
         </section>
         <section id="contentSection">
             <label for="articleBody">Contenue de l'article</label>
+            <br>
             <textarea type="text-area" name="" id="body">
-            </textarea>
+                </textarea>
         </section>
         <section id="categorySection">
             <label for="articleCategory">Catégorie de l'article</label>
+            <br>
             <select id="category-select">
             </select>
         </section>
         <section id="tagsSection">
             <label for="articleTags1">Tags de l'article</label>
-            <select name="tags1" class='tags' id="tags1">
-            </select>
+            <br> <select name="tags1" class='tags' id="tags1">
+                </select>
             <select name="tags2" class='tags' id="tags2">
             </select>
         </section>
@@ -39,11 +42,13 @@
     </div>
     <section id="dateSection">
         <label for="articleDate">date de publication de l'article</label>
+        <br>
         <input type="date" id="dateSelect"> </section>
     <div>
         <button id="create">
         Creer cet article
         </button>
+        <div id="resultMessage"></div>
     </div>
 
 </body>
