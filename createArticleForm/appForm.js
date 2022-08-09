@@ -4,7 +4,7 @@ const buttonTag = document.getElementById('newTag')
 const titleValue=document.getElementById('title')
 const bodyValue=document.getElementById('body')
 const categoryValue=document.getElementById('category-select')
-const writerValue=document.getElementById('writer')
+const writerValue=document.getElementById('writer-select')
 const dateValue=document.getElementById('dateSelect')
 
 // appel d'api poour récuperer les tags
@@ -39,7 +39,29 @@ async function GetCategories(){
 }
 GetCategories()
 
+async function getWriters(){
+    const JsonResponseUser= await(fetch("https://127.0.0.1:8000/api/users"))
+    const responseUser= await JsonResponseUser.json()
+    const JsonResponseWriter= await(fetch("https://127.0.0.1:8000/api/writers"))
+    const responseWriter= await JsonResponseWriter.json()
+    responseUser['hydra:member'].forEach(responseUser=>{
+        if(responseUser.roles.includes("ROLE_WRITER")){
+            console.log(responseUser.id)
+            responseWriter['hydra:member'].forEach(response=>{
+                console.log(response.user)
+                if(response.user==`/api/users/${responseUser.id}`){
+                    let writerList=document.getElementById('writer-select')
+                    let selectWriter=document.createElement('option')
+                    selectWriter.innerHTML=`${response.id}:${responseUser.email}`
+                    selectWriter.value=response.id
+                    writerList.appendChild(selectWriter)
+                }
+            })
 
+        }
+    })
+}
+getWriters()
 // fuction pour créér un nouveau select et ajouter plus de deux tags
 function newTag(){
     let errorSection=document.getElementById('errorSection');
@@ -80,7 +102,7 @@ const createArticle = async function(event) {
         "body":bodyValue.value,
         "tags":tagsArray,
         "category": "/api/categories/"+categoryValue.value,
-        "writer":"/api/writers/1",
+        "writer":"/api/writers/"+writerValue.value,
         "publishedAt":dateValue.value,
     };
 
