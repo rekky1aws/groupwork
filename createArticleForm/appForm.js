@@ -47,21 +47,16 @@ function newTag(){
     tagsArray.push(value2)
     if(value1==value2){
         tagsArray=[]
-        errorMessage.innerHTML='Vous devez séléctionner des tags differents'
-        tagsSection.appendChild(errorMessage)
+
     }else{
-        document.getElementById('error').innerHTML='Veillez à séléctionner des tags differents'
         tagId++
         let NewTag=document.createElement('select')
         let tagsSection=document.getElementById('tagsSection')
         NewTag.id=`tags${tagId}`
         tagsSection.appendChild(NewTag)
-
         GetTags()
-
         
         
-
     }
 }
 
@@ -79,6 +74,7 @@ const createArticle = function(event) {
         "tags":tagsArray,
         "category": "/api/categories/"+categoryValue.value,
         "writer":"/api/writers/1",
+        "publishedAt":curentDate
         
         
 
@@ -101,7 +97,7 @@ const createArticle = function(event) {
         }
         else {
             console.log(responseJSON)
-            resultDiv.innerHTML = "Catégorie créée";
+            resultDiv.innerHTML = "Article créée";
         }
         document.body.appendChild(resultDiv);
     })
