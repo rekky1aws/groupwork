@@ -38,17 +38,18 @@ GetCategories()
 
 const buttonTag = document.getElementById('newTag')
 function newTag(){
-    let errorMessage=document.createElement('p')
-    let tagsSection=document.getElementById('tagsSection')
+    let errorSection=document.getElementById('errorSection');
     let value1=document.getElementById('tags1').value
     let value2=document.getElementById('tags2').value
-    errorMessage.id='error'
+        errorSection.innerHTML=''
     tagsArray.push(value1)
     tagsArray.push(value2)
     if(value1==value2){
         tagsArray=[]
-
+        errorSection.innerHTML='Erreur :Vous devez séléctionner des tags differents'
+        errorSection.appendChild(errorMessage)
     }else{
+        document.getElementById('errorSection').innerHTML=''
         tagId++
         let NewTag=document.createElement('select')
         let tagsSection=document.getElementById('tagsSection')
