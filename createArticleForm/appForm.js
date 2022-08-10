@@ -1,5 +1,8 @@
 let tagId = 2
 let tagsArray = []
+let tagsStorage=[]
+let dateIsSaving= document.getElementById('save')
+
 const buttonTag = document.getElementById('newTag')
 const titleValue = document.getElementById('title')
 const bodyValue = document.getElementById('body')
@@ -8,21 +11,26 @@ const writerValue = document.getElementById('writer-select')
 const dateValue = document.getElementById('dateSelect')
 
 function storeData() {
+  
   let data = {
+    
     'title': titleValue.value,
     'body': bodyValue.value,
     'category': categoryValue.selectedIndex,
+    'tags':tagsStorage,
     'writer': writerValue.value,
     'date': dateValue.value
   }
   localStorage.setItem('data', JSON.stringify(data));
   console.log("storage done");
+
 }
 
 
-function getData() {
+async function getData() {
 
   let storagedata = JSON.parse(localStorage.getItem('data'))
+  console.log(storagedata.tags.length)
   console.log("storage data: ", storagedata);
   console.log("stored category: ", storagedata.category);
   titleValue.value = storagedata.title
@@ -30,8 +38,20 @@ function getData() {
   categoryValue.selectedIndex = storagedata.category
   writerValue.value = storagedata.writer
   dateValue.value = storagedata.date
-  categoryValue.selectedIndex = storagedata.category
+  for(let i=1;i<=storagedata.tags.length;i++){
 
+    if(i>2){
+      tagId++
+      let NewTag = document.createElement('select')
+      let tagsSection = document.getElementById('tagsSection')
+      NewTag.id = `tags${tagId}`
+      tagsSection.appendChild(NewTag)
+       await getTags()
+       document.getElementById(`tags${i}`).selectedIndex=storagedata.tags[(i-1)];
+      
+    }    
+      document.getElementById(`tags${i}`).selectedIndex=storagedata.tags[(i-1)];
+  }
 }
 
 console.log(localStorage.getItem('data'))
@@ -95,8 +115,7 @@ function newTag() {
   let value1 = document.getElementById('tags1').value
   let value2 = document.getElementById('tags2').value
   errorSection.innerHTML = ''
-  tagsArray.push(value1)
-  tagsArray.push(value2)
+
   // vérification des valeurs des deux premier id pour rappeler la regles des tags different
   if (value1 == value2) {
     tagsArray = []
@@ -111,15 +130,22 @@ function newTag() {
     NewTag.id = `tags${tagId}`
     tagsSection.appendChild(NewTag)
     getTags()
-
-
   }
 }
 
 buttonTag.addEventListener("click", newTag)
 
+function addTags(){
+  tagsStorage=[]
+  for (let i=1 ; i<=tagId;i++){
+tagsStorage.push(document.getElementById(`tags${i}`).selectedIndex)
+  }
+  console.log(tagsStorage)
+}
+document.getElementById('tagsSection').addEventListener('change',addTags)
 const createArticle = async function(event) {
   tagsArray = []
+  
   for (let i = 1; i <= tagId; i++) {
     tagsArray.push("/api/tags/" + document.getElementById(`tags${i}`).value)
   }
@@ -132,7 +158,15 @@ const createArticle = async function(event) {
     "writer": "/api/writers/" + writerValue.value,
     "publishedAt": dateValue.value,
   };
-
+if(dateIsSaving.checked==false){
+  requestBody={
+    "title": titleValue.value,
+    "body": bodyValue.value,
+    "tags": tagsArray,
+    "category": "/api/categories/" + categoryValue.value,
+    "writer": "/api/writers/" + writerValue.value,
+  }
+}
   const JSONResponse = await fetch("https://127.0.0.1:8000/api/articles", {
     method: "POST",
     headers: {
@@ -150,6 +184,11 @@ const createArticle = async function(event) {
   } else {
     console.log(response)
     resultDiv.innerHTML = "Article créée";
+    titleValue.value = ''
+    bodyValue.value = ''
+    dateValue.value = ''
+    localStorage.clear()
+    location.reload()
   }
   document.body.appendChild(resultDiv);
 
@@ -161,8 +200,9 @@ async function loader() {
   const categories = await getCategories();
   const tags = await getTags();
   const writers = await getWriters();
-  const data = await getData();
   const storeInterval = setInterval(storeData, 3000);
+  const data = await getData();
+ 
 }
 
 loader();
