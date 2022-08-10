@@ -1,0 +1,22 @@
+#authors-list {
+	display: flex;
+	flex-direction: column;
+	margin: 25px;
+	gap: 15px;
+}
+
+.author {
+	display: flex;
+	gap: 5px;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px;
+	background-color: lightcyan;
+}
+
+
+.author-button {
+	border: none;
+	background-color: transparent;
+	font-size: 30px;
+}

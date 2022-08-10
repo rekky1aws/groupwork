@@ -1,0 +1,26 @@
+body {
+	margin: 0;
+	font-family: Helvetica;
+}
+
+a {
+	background-color: cornflowerblue;
+	color: black;
+	padding: 10px 15px;
+	border-radius: 25px;
+	margin: 15px;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+header {
+	padding-top: 25px;
+}
+
+.cliquable:hover {
+	transform: scale(1.05);
+}
+
+.cliquable:active {
+	transform: scale(0.9);
+}
