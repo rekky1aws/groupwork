@@ -1,5 +1,6 @@
 let tagId=2
 let tagsArray=[]
+let storagedata=JSON.parse(localStorage.getItem('data'))
 const buttonTag = document.getElementById('newTag')
 const titleValue=document.getElementById('title')
 const bodyValue=document.getElementById('body')
@@ -7,6 +8,33 @@ const categoryValue=document.getElementById('category-select')
 const writerValue=document.getElementById('writer-select')
 const dateValue=document.getElementById('dateSelect')
 
+
+
+function storeData(){
+    let data={
+        'title':titleValue.value,
+        'body':bodyValue.value,
+        'category':categoryValue.selectedIndex,
+        'writer':writerValue.value,
+        'date':dateValue.value
+    }
+    localStorage.setItem('data',JSON.stringify(data))
+    console.log("storage done")
+}
+setInterval(storeData,3000) 
+
+function getData(){
+    
+    titleValue.value=storagedata.title
+    bodyValue.value=storagedata.body
+    categoryValue.option.selectedIndex = storagedata.category
+    writerValue.value=storagedata.writer
+    dateValue.value=storagedata.date
+    categoryValue.selectedIndex=storagedata.category
+    
+}
+
+console.log(localStorage.getItem('data'))
 // appel d'api poour récuperer les tags
 async function GetTags(){
     const JsonResponse= await(fetch("https://127.0.0.1:8000/api/tags"))
@@ -20,6 +48,7 @@ async function GetTags(){
         selectTag.innerHTML=`${response.id}:${response.name}`
         selectTag.value=response.id
         tagsList.appendChild(selectTag)
+        
 })
 }
 }
@@ -131,3 +160,4 @@ const createArticle = async function(event) {
 
 document.getElementById('create').addEventListener('click',createArticle)
 
+getData()
