@@ -9,6 +9,19 @@ body {
 	align-items: center;
 }
 
+input {
+	padding: 5px 10px;
+	border-radius: 25px;
+	border: 1px solid black;
+	font-size: 25px;
+}
+
+#fake-form div {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
 #fake-form {
 	display: flex;
 	flex-direction: column;
@@ -18,21 +31,8 @@ body {
 	font-size: 30px;
 }
 
-#fake-form div {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-input {
-	padding: 5px 10px;
-	border-radius: 25px;
-	border: 1px solid black;
-	font-size: 25px;
-}
-
 #validate {
-	background-color: lime;
+	background-color: #AAFF88;
 	border: none;
 	font-size: 25px;
 	margin: 25px;
@@ -41,10 +41,8 @@ input {
 	font-weight: bold;
 }
 
-#validate:hover {
-	transform: scale(1.05);
-}
-
 #validate:active {
 	transform: scale(0.95);
+}#validate:hover {
+	transform: scale(1.05);
 }

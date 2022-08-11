@@ -23,6 +23,8 @@ h1 {
 	align-items: center;
 	padding: 15px;
 	background-color: lightcyan;
+	border-radius: 5px;
+	box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.5);
 }
 
 .author-button {
@@ -53,13 +55,4 @@ h1 {
 .author-mail::before {
 	content:  " : ";
 	font-weight: bold;
-}
-
-#info-message {
-	padding: 15px;
-	border: 1px solid black;
-	border-radius: 25px;
-	margin: 15px;
-	display: none;
-	text-align: center;
 }
