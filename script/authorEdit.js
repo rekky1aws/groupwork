@@ -4,6 +4,8 @@ const apiUrl = "https://localhost:8000";
 
 // Select pour choisir les Users
 const userSelect = document.querySelector('#user-selector');
+// Div pour les infos
+const infoMessage = document.querySelector('#info-message');
 
 // Bouton de validation
 const validateButton = document.querySelector('.validate-button');
@@ -31,18 +33,18 @@ function getUrlParams ()
 
 async function getUsers ()
 {
+	// On récupère tous les utilisateurs depuis l'API.
 	const response = await fetch(apiUrl + "/api/users/");
 	const responseJSON = await response.json();
 	const users = responseJSON['hydra:member'];
 
+	// Pour chaque utilisateur on créé une option dans le select.
 	users.forEach((element) => {
 		let userOption = document.createElement('option');
 		userOption.value = element.id;
 		userOption.textContent = `${element.id} : ${element.email}`;
 		userSelect.append(userOption);
 	});
-
-	
 
 	// On récupère les informations sur le writer dont l'id est passé en paramètre dans l'URL.
 	const authorResponse = await fetch(apiUrl + "/api/writers/" + urlParams.id);
@@ -62,18 +64,18 @@ async function getUsers ()
 
 async function sendData ()
 {
+	// On récupère les données de base de notre auteur.
 	const writerBase = await fetch(apiUrl + "/api/writers/" + urlParams.id);
 	const writerBaseJSON = await writerBase.json();
-	console.log(writerBaseJSON);
-
+	
+	// On crée le body de notre requête pour modifier l'auteur, avec certaines données qui ne bougent pas.
 	let requestBody = {
 		"articles": writerBaseJSON.articles,
 		"pages": writerBaseJSON.pages,
-		"user": "/api/users/" + toString(userSelect.selectedIndex + 1)
 	}
 	requestBody.user = "/api/users/" + (userSelect.selectedIndex + 1);
-	console.log(requestBody);
 
+	// Requete pour modifier la bdd
 	const response = await fetch(apiUrl + "/api/writers/" + urlParams.id, {
 		method: 'PATCH',
 		body: JSON.stringify(requestBody),
@@ -84,12 +86,17 @@ async function sendData ()
 	if(response.status === 200)
 	{
 		const responseJSON = await response.json();
-		console.log(responseJSON);
+		infoMessage.textContent = "L'auteur a été modifié.";
+		infoMessage.style.display = 'block';
+		infoMessage.style.borderColor = "seagreen";
+		infoMessage.style.color = "seagreen";
 	} else if (response.status === 500) {
-		alert("Impossible d'associer l'auteur à cet utilisateur, celui-ci est déjà associé à un autre auteur");
+		infoMessage.textContent = "Impossible d'associer l'auteur à cet utilisateur, celui-ci est déjà associé à un autre auteur.";
+		infoMessage.style.display = 'block';
+		infoMessage.style.borderColor = "tomato";
+		infoMessage.style.color = "tomato";
 	}
 }
-
 
 // On récupère les paramètres passés dans l'URL sous forme d'objet.
 const urlParams = getUrlParams();

@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="/style/main.css">
+	<link rel="stylesheet" type="text/css" href="/style/authorEdit.css">
 	<script type="text/javascript" src="/script/authorEdit.js" defer></script>
 	<title>Author Edition</title>
 </head>
@@ -15,11 +16,15 @@
 	<h1>Editer l'auteur</h1>
 
 	<div class="form">
-		<label for="user-selector">Utilisateur :</label>
-		<select id="user-selector">
-			
-		</select>
+		<div class="input-field">
+			<label for="user-selector">Utilisateur :</label>
+			<select id="user-selector">
+				
+			</select>
+		</div>
 		<button class="cliquable validate-button">Valider</button>
 	</div>
+
+	<div id="info-message"></div>
 </body>
 </html>
