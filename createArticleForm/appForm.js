@@ -188,7 +188,7 @@ if(dateIsSaving.checked==false){
     bodyValue.value = ''
     dateValue.value = ''
     localStorage.clear()
-    location.reload()
+    setTimeout(location.reload(),5000) 
   }
   document.body.appendChild(resultDiv);
 
@@ -200,7 +200,7 @@ async function loader() {
   const categories = await getCategories();
   const tags = await getTags();
   const writers = await getWriters();
-  const storeInterval = setInterval(storeData, 3000);
+  const storeInterval = setInterval(storeData, 1000);
   const data = await getData();
  
 }
