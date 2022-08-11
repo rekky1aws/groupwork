@@ -72,7 +72,7 @@ async function sendData ()
 		"user": "/api/users/" + toString(userSelect.selectedIndex + 1)
 	}
 	requestBody.user = "/api/users/" + (userSelect.selectedIndex + 1);
-	console.log(JSON.stringify(requestBody));
+	console.log(requestBody);
 
 	const response = await fetch(apiUrl + "/api/writers/" + urlParams.id, {
 		method: 'PATCH',
@@ -81,8 +81,13 @@ async function sendData ()
 			'Content-Type': 'application/merge-patch+json',
 		},
 	});
-	const responseJSON = await response.json();
-	console.log(responseJSON);
+	if(response.status === 200)
+	{
+		const responseJSON = await response.json();
+		console.log(responseJSON);
+	} else if (response.status === 500) {
+		alert("Impossible d'associer l'auteur à cet utilisateur, celui-ci est déjà associé à un autre auteur");
+	}
 }
 
 

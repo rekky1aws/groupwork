@@ -8,8 +8,6 @@ async function loadAuthors () {
 	writers = responseJSON['hydra:member'];
 
 	writers.forEach(async (element) => {
-		console.log(element.id);
-
 		const writerResponse = await fetch(apiUrl + element['@id']);
 		const writerJSON = await writerResponse.json();
 
