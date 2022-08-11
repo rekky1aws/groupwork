@@ -1,25 +1,13 @@
-select {
-	padding: 10px 15px;
-	border-radius: 25px;
-}
-
-#info-message {
-	padding: 15px;
-	border: 1px solid black;
-	border-radius: 25px;
-	margin: 15px;
-	display: none;
+h1 {
 	text-align: center;
 }
 
-.validate-button {
-	padding: 10px 15px;
-	background-color: seagreen;
-	color: white;
+label {
 	font-weight: bold;
-	font-size: 20px;
-	display: inline-block;
-	border: none;
+}
+
+select {
+	padding: 10px 15px;
 	border-radius: 25px;
 }
 
@@ -31,16 +19,26 @@ select {
 	gap: 15px;
 }
 
-h1 {
-	text-align: center;
-}
-
-label {
-	font-weight: bold;
-}
-
 .input-field {
 	display: flex;
 	gap :  5px;
 	align-items: center;
+}.validate-button {
+	padding: 10px 15px;
+	background-color: seagreen;
+	color: white;
+	font-weight: bold;
+	font-size: 20px;
+	display: inline-block;
+	border: none;
+	border-radius: 25px;
+}
+
+#info-message {
+	padding: 15px;
+	border: 1px solid black;
+	border-radius: 25px;
+	margin: 15px;
+	display: none;
+	text-align: center;
 }
