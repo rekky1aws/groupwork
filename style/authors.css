@@ -1,3 +1,9 @@
+@keyframes jiggle {
+	0%, 12.5%, 25%, { transform: rotate(0deg); }
+	6.25% { transform: rotate(-20deg) scale(1.05); }
+	18.75% { transform: rotate(0deg) scale(1.1); }
+}
+
 #authors-list {
 	display: flex;
 	flex-direction: column;
@@ -14,9 +20,12 @@
 	background-color: lightcyan;
 }
 
-
 .author-button {
 	border: none;
 	background-color: transparent;
 	font-size: 30px;
+}
+
+.author-button:hover {
+	animation: jiggle 2s infinite;
 }
