@@ -1,0 +1,65 @@
+@keyframes jiggle {
+	0%, 12.5%, 25%, { transform: rotate(0deg); }
+	6.25% { transform: rotate(-20deg) scale(1.05); }
+	18.75% { transform: rotate(0deg) scale(1.1); }
+}
+
+h1 {
+	margin: 25px;
+	text-align: center;
+}
+
+#authors-list {
+	display: flex;
+	flex-direction: column;
+	margin: 25px;
+	gap: 15px;
+}
+
+.author {
+	display: flex;
+	gap: 5px;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px;
+	background-color: lightcyan;
+}
+
+.author-button {
+	border: none;
+	background-color: transparent;
+	font-size: 30px;
+}
+
+.author-button:hover {
+	animation: jiggle 2s infinite;
+}
+
+.create-button {
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: seagreen;
+	color: white;
+	margin: 25px;
+}
+
+.author-infos {
+	display: flex;
+	gap: 5px;
+	align-items: center;
+}
+
+.author-mail::before {
+	content:  " : ";
+	font-weight: bold;
+}
+
+#info-message {
+	padding: 15px;
+	border: 1px solid black;
+	border-radius: 25px;
+	margin: 15px;
+	display: none;
+	text-align: center;
+}
