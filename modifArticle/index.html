@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/modifArticle/modifArticle.js" defer></script>
+    <title>Document</title>
+  </head>
+
+  <body class="p-2">
+    <header>
+      <h1 id="pageTitle" class="text-6xl font-semibold mb-6">Modification d’une article</h1>
+      <pre id="infoZone"></pre>
+    </header>
+    <section id="main">
+      <div>
+        <label class="block mb-2 text-xl font-medium text-gray-900">Sélectionner une Article : </label
+        ><select id="articles" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg mb-2"></select>
+      </div>
+      <hr class="mb-4" />
+      <div>
+        <label class=" mb-2 text-xl font-medium text-gray-900">Modifiér le titre article : </label
+        ><input id="articleName" type="text" class="mb-4 block bg-gray-50 border border-gray-300 text-gray-900 text-xl w-[800px]"/>
+      </div>
+      <div>
+        <label class=" mb-2 text-xl font-medium text-gray-900">Modifiér contenue de la article : </label><br /><textarea
+          type="text-area"
+          id="articleBody"
+          class="block p-3 w-[600px] h-36 text-lg text-gray-900 bg-gray-50 rounded-lg border border-gray-300 mb-4"
+        >
+        </textarea>
+      </div>
+    </section>
+    <section >
+      <label for="articleTags1" class="block mb-2 text-xl font-medium text-gray-900">Tags de l'article</label>
+      <div id="tagsSection">
+    </div>
+    <button type="button" id="newTag" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">New tag</button>
+    </section>
+    <section >
+        <label class="mb-2 block text-xl font-medium text-gray-900">Category de l'article</label>
+        <div id="categorySection"></div>
+      </section>
+    <!-- <footer>Dokounin Vladyslav, 2022</footer> -->
+  </body>
+</html>
