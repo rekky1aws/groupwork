@@ -1,0 +1,40 @@
+body {
+	margin: 0;
+	font-family: Helvetica, sans-serif;
+}
+
+main {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+}
+
+.wordcloud {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0 5px;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+}
+
+a {
+	margin: 0;
+	text-decoration: none;
+	color: black;
+}
+
+a:nth-child(2n) {
+	color: darkred;
+}
+
+a:nth-child(3n) {
+	color: darkslateblue;
+}
+
+a:hover {
+	transform: scale(1.05);
+}
