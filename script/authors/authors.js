@@ -43,7 +43,7 @@ async function loadAuthors () {
 		editButton.className = "cliquable author-button author-edit";
 		editButton.textContent = "📝";
 		editButton.addEventListener('click', function () {
-			window.location.href = "/authors/edit?id=" + element.id;
+			window.location.href = "./edit?id=" + element.id;
 		})
 
 		authorInfos.append(authorId, authorMail);
