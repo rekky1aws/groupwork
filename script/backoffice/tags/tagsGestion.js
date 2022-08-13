@@ -5,7 +5,7 @@ let infoMessage = document.getElementById('info');
 
 async function getTags() {
     nameField.value = '';
-    const jsonResponse = await fetch("https://127.0.0.1:8000/api/tags");
+    const jsonResponse = await fetch("https://localhost:8000/api/tags");
     const response = await jsonResponse.json();
     response['hydra:member'].forEach(response => {
       
@@ -34,10 +34,11 @@ async function updateTag(){
     let APIURL = null;
     let HTTPMethod = null;
     if (tagList.value === 'nouveau tag') {
-        APIURL = 'https://127.0.0.1:8000/api/tags';
+        APIURL = 'https://localhost:8000/api/tags';
         HTTPMethod = 'POST';
     } else {
-        APIURL = 'https://127.0.0.1:8000/api/tags/' + (tagList.value);
+        APIURL = 'https://localhost:8000/api/tags/' + (tagList.value);
+        console.log(APIURL);
         HTTPMethod = 'PUT';
     }
     const JsonResponse = await fetch(APIURL, {

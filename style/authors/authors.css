@@ -38,9 +38,6 @@ h1 {
 }
 
 .create-button {
-	position: absolute;
-	top: 0;
-	right: 0;
 	background-color: seagreen;
 	color: white;
 	margin: 25px;
@@ -55,4 +52,8 @@ h1 {
 .author-mail::before {
 	content:  " : ";
 	font-weight: bold;
+}
+
+header {
+	
 }

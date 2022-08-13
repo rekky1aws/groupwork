@@ -1,0 +1,31 @@
+main {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 15px;
+}
+
+main > * {
+	width: 50%;
+	display: flex;
+	align-items: center;
+}
+
+main > * > * {
+	width: 100%;
+	text-align: center;
+}
+
+h1 {
+	text-align: center;
+}
+
+button {
+	display: inline-block;
+	text-align: center;
+	background-color: seagreen;
+	color: #EEE;
+	font-size: 1.5em;
+	margin-top: 25px;
+}
