@@ -1,21 +1,29 @@
 const nameField = document.querySelector('#name');
 const categorieList = document.querySelector('#category-select');
-const updateButton =document.querySelector("#update");
+const updateButton = document.querySelector("#update");
 
 let categoryName = [];
 
 async function getCategories() {
     nameField.value = '';
+    categorieList.innerHTML = null;
+
     const jsonResponse = await (fetch("https://127.0.0.1:8000/api/categories"));
     const response = await jsonResponse.json();
+    
+    let newCategory = document.createElement('option');
+    newCategory.className = 'new-category';
+    newCategory.textContent = 'Nouvelle Catégorie';
+    categorieList.append(newCategory);
+
     response['hydra:member'].forEach(response => {
 
-      let selectCategory = document.createElement('option');
-      selectCategory.innerHTML = `${response.id} : ${response.name}`;
-      selectCategory.name = response.name;
-      selectCategory.value = response.id;
-      categorieList.appendChild(selectCategory);
-      categoryName.push(response.name);
+        let selectCategory = document.createElement('option');
+        selectCategory.innerHTML = `${response.id} : ${response.name}`;
+        selectCategory.name = response.name;
+        selectCategory.value = response.id;
+        categorieList.appendChild(selectCategory);
+        categoryName.push(response.name);
   });
 }
 
@@ -71,6 +79,8 @@ async function updateCategorie()
     } else {
         infoMessage.newMessage('Impossible de créer une catégorie sans nom', 'error');
     }
+
+    getCategories();
 }
 
 getCategories();
