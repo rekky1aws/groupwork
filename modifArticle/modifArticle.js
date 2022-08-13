@@ -1,4 +1,4 @@
-// Configuration variables
+// Configuration variables API
 const APIURL = "https://127.0.0.1:8000/api";
 const articlesAPIURL = APIURL + "/articles/";
 const tagsAPIURL = APIURL + "/tags/";
@@ -7,22 +7,43 @@ const usersAPIURL = APIURL + "/users/";
 const writersAPIURL = APIURL + "/writers/";
 
 // future DOM interactions
+
+// infoZone
+const infoZoneDiv = document.querySelector("#infoZone");
+// for select Articles
 const articleSelect = document.querySelector("#articles");
+// for input 'titre de l'article'
 const articleNameInput = document.querySelector("#articleName");
+// for input 'Contenue de l'article'
 const articleBodyInput = document.querySelector("#articleBody");
+// for select 'Tags de l'article'
 const sectionTags = document.querySelector("#tagsSection");
+// for button 'ajouter un tag'
 const buttonTag = document.querySelector("#newTag");
+// for select 'Categorie de l'article'
 const sectionCategory = document.querySelector("#categorySection");
+// for select 'Auteur de l'article'
 const writerSelect = document.querySelector("#writer-select");
+// for select date
 const dateValue = document.querySelector("#dateSelect");
+// for the checkbox'save'
 const dateIsSaving = document.querySelector("#save");
+// for button 'Modifier article'
 const btnUpdate = document.querySelector("#btnUpdate");
 
+// array for insert tags
 let arrayTag = [];
+// array for insert category
 let arrayCategory = [];
+// count for tags
 let tagsCount = 0;
+
+// Call API for get articles data
 async function getArticles() {
-  const responseJSON = await fetch(articlesAPIURL);
+  articleNameInput.value = "";
+  articleBodyInput.value = "";
+
+  const responseJSON = await fetch(articlesAPIURL, { method: "GET" });
   const response = await responseJSON.json();
   response["hydra:member"].forEach((response) => {
     let articleList = document.getElementById("articles");
@@ -31,8 +52,8 @@ async function getArticles() {
     selectArticle.value = response.id;
     articleList.appendChild(selectArticle);
   });
-  console.log(response["hydra:member"]);
 }
+getArticles();
 
 async function getArticleData() {
   sectionTags.innerHTML = null;
@@ -40,17 +61,19 @@ async function getArticleData() {
   const id = articleSelect.selectedIndex + 1;
   const responseJSON = await fetch(articlesAPIURL + id);
   const response = await responseJSON.json();
-  console.log(response.publishedAt);
+
   arrayTag = response.tags.map((e) => e.split("/")).map((e) => e[3]);
-  console.log(arrayTag);
+  buttonTag.classList.toggle("hidden");
 
   arrayCategory = response.category.split("/");
   arrayCategory = arrayCategory[3];
 
   articleNameInput.value = response.title;
   articleBodyInput.value = response.body;
-  dateValue.selectedIndex = response.publishedAt;
-  console.log(dateValue.selectedIndex);
+
+  const today = new Date();
+  dateValue.value = today.toISOString().substr(0, 10);
+  console.log(dateValue.value);
 
   await getTags();
   await getCategories();
@@ -58,13 +81,11 @@ async function getArticleData() {
 
   for (let i = 1; i <= arrayTag.length; i++) {
     document.getElementById(`tags${i}`).selectedIndex = arrayTag[i - 1] - 1;
-    console.log(i);
   }
   document.getElementById("category").selectedIndex = arrayCategory[0] - 1;
 }
-getArticles();
 
-// appel d'api poour récuperer les tags
+// Call API for get tags data
 async function getTags() {
   tagsCount = 0;
   const responseJSON = await fetch(tagsAPIURL);
@@ -72,7 +93,6 @@ async function getTags() {
   // creàtion d'une boucle pour que chaque select contienne les tags
   for (let i = 1; i <= arrayTag.length; i++) {
     tagsCount++;
-    console.log(i);
     let tagsList = document.createElement("select");
     tagsList.id = `tags${i}`;
     response["hydra:member"].forEach((response) => {
@@ -84,6 +104,7 @@ async function getTags() {
     });
   }
 }
+
 // function create a select box for additional tag
 async function newTag() {
   const responseJSON = await fetch(tagsAPIURL);
@@ -103,9 +124,10 @@ async function newTag() {
     newTag.appendChild(selectTag);
   });
 }
-
+// on click 'ajouter un tag' create new select box + API
 buttonTag.addEventListener("click", newTag);
 
+// Call API for get tags data
 async function getCategories() {
   const responseJSON = await fetch(categoryAPIURL);
   const response = await responseJSON.json();
@@ -150,8 +172,11 @@ async function getWriters() {
     }
   });
 }
-
+// fuction for PUT form values with API
 function updateArticle() {
+  if (articleNameInput.value == "") {
+    return;
+  }
   // reset tags Array for security
   tagsArray = [];
   // for each select box push select box value in tagsArray
@@ -163,6 +188,7 @@ function updateArticle() {
   const headers = {
     "Content-Type": "application/json",
   };
+
   let requestBody = {
     title: articleNameInput.value,
     body: articleBodyInput.value,
@@ -184,15 +210,16 @@ function updateArticle() {
     method: "PUT",
     headers: headers,
     body: JSON.stringify(requestBody),
-  })
-    .then(function (response) {
-      return response.json();
-    })
-    .then((responseJSON) => {
-      console.log(responseJSON);
-    })
-    .catch((err) => console.log(err));
+  }).then((response) => {
+    getArticles();
+    if (response.status === 200) {
+      infoZoneDiv.textContent = "Modification de la catégorie effectuée";
+    } else {
+      infoZoneDiv.textContent =
+        "⚠ Une erreur est survenue lors de la modification de la catégorie";
+    }
+  });
 }
-
+// event listener for "modifie cet article" button
 btnUpdate.addEventListener("click", updateArticle);
 articleSelect.addEventListener("change", getArticleData);
