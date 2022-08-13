@@ -1,5 +1,6 @@
 class InfoMessages {
 	constructor() {
+		this.generateContainer;
 		this.typeStyles = {
 			"base": {
 				"border" : "1px solid black",
@@ -80,7 +81,4 @@ class InfoMessages {
 	}
 }
 
-let infoMessageClass = new InfoMessages();
-
-infoMessageClass.generateContainer;
-infoMessageClass.newMessage('Coucou', 'error');
+const infoMessage = new InfoMessages();
