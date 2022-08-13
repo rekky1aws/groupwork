@@ -4,8 +4,6 @@ const apiUrl = "https://localhost:8000";
 
 // Select pour choisir les Users
 const userSelect = document.querySelector('#user-selector');
-// Div pour les infos
-const infoMessage = document.querySelector('#info-message');
 
 // Bouton de validation
 const validateButton = document.querySelector('.validate-button');
@@ -86,15 +84,9 @@ async function sendData ()
 	if(response.status === 200)
 	{
 		const responseJSON = await response.json();
-		infoMessage.textContent = "L'auteur a été modifié.";
-		infoMessage.style.display = 'block';
-		infoMessage.style.borderColor = "seagreen";
-		infoMessage.style.color = "seagreen";
+		infoMessage.newMessage("L'auteur a été modifié.", "ok");
 	} else if (response.status === 500) {
-		infoMessage.textContent = "Impossible d'associer l'auteur à cet utilisateur, celui-ci est déjà associé à un autre auteur.";
-		infoMessage.style.display = 'block';
-		infoMessage.style.borderColor = "tomato";
-		infoMessage.style.color = "tomato";
+		infoMessage.newMessage("Impossible d'associer l'auteur à cet utilisateur, celui-ci est déjà associé à un autre auteur.", "error");
 	}
 }
 

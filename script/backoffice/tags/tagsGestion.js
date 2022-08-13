@@ -1,7 +1,6 @@
 let nameField = document.getElementById('name');
 let tagList = document.getElementById('tags-select');
 let categoryName = [];
-let infoMessage = document.getElementById('info');
 
 async function getTags() {
     nameField.value = '';
@@ -48,15 +47,15 @@ async function updateTag(){
         },
         body: JSON.stringify({
             name: nameField.value
-        })
+        });
     });
 
     if (JsonResponse.status == 200) {
-        infoMessage.innerHTML = "tag modifié";
+        infoMessage.newMessage("Tag modifié", 'ok');
     } else if (JsonResponse.status == 201) {
-        infoMessage.innerHTML = "Tag créé";
+        infoMessage.newMessage("Tag créé", 'ok');
     } else {
-        infoMessage.innerHTML = 'Une erreur est survenue';
+        infoMessage.newMessage('Une erreur est survenue', 'error');
     }
 }
 

@@ -16,6 +16,7 @@ header a {
 	margin: 5px;
 	text-decoration: none;
 	font-weight: bold;
+	display: inline-block;
 }
 
 .rounded-button {

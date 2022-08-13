@@ -47,6 +47,9 @@ class InfoMessages {
 		container.style.margin = "15px";
 		container.style.right = "15px";
 		container.style.bottom = '15px';
+		container.style.maxWidth = '500px';
+		container.style.maxHeight = '500px';
+		container.style.overflowY = 'auto';
 	}
 
 	newMessage(message, type = "base") {
