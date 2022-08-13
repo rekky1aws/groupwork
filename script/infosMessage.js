@@ -9,6 +9,18 @@ class InfoMessages {
 				"border" : "1px solid tomato",
 				"color": "tomato"
 			},
+			"ok": {
+				"border" : "1px solid seagreen",
+				"color": "seagreen"
+			},
+			"warn": {
+				"border" : "1px solid gold",
+				"color": "gold"
+			},
+			"cancel": {
+				"border" : "1px solid cornflowerblue",
+				"color": "cornflowerblue"
+			},
 		}
 	}
 
