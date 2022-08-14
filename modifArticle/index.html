@@ -81,12 +81,13 @@
     <section id="dateSection">
       <input type="radio" id="save" name="save"/>
       <label for="save" class="mb-2 text-xl font-medium text-gray-900 pt-2"
-        >Je souhaite enregistrer nouvelle date de publication</label
+        >Je souhaite enregistrer une date de publication</label
         >
         <br />
       <input
-        type="date"
+        type="datetime-local"
         id="dateSelect"
+        step="1"
         class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg mb-2 mt-2"
       /><br />
       <input type="radio" id="noSave" name="save"/>

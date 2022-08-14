@@ -73,9 +73,23 @@ async function getArticleData() {
   articleNameInput.value = response.title;
   articleBodyInput.value = response.body;
 
-  const today = new Date();
-  dateValue.value = today.toISOString().substr(0, 10);
-  console.log(dateValue.value);
+  if (response.published_at) {
+    document.querySelector('#noSave').checked = false;
+    document.querySelector('#save').checked = true;
+  } else {
+    document.querySelector('#noSave').checked = true;
+    document.querySelector('#save').checked = false;
+  }
+
+  const formatedDate = 
+    // Si on a une date de publication.
+    response.publishedAt ? 
+      response.publishedAt.split("+")[0] // On choisi cette date
+    :  // Sinon
+      new Date().toISOString().split("T")[0] + "T" + new Date().toLocaleTimeString().split(".")[0]; // On affiche la date d'aujourd'hui au bon format (avec l'heure correcte)
+
+  console.log(formatedDate);
+  dateValue.value = formatedDate;
 
   await getTags();
   await getCategories();
