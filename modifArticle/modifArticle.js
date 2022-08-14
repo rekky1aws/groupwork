@@ -28,6 +28,8 @@ const writerSelect = document.querySelector("#writer-select");
 const dateValue = document.querySelector("#dateSelect");
 // for the checkbox'save'
 const dateIsSaving = document.querySelector("#save");
+// for the checkbox'save'
+const dateIsNotSaving = document.querySelector("#noSave");
 // for button 'Modifier article'
 const btnUpdate = document.querySelector("#btnUpdate");
 
@@ -45,6 +47,7 @@ async function getArticles() {
 
   const responseJSON = await fetch(articlesAPIURL, { method: "GET" });
   const response = await responseJSON.json();
+  console.log(response["hydra:member"]);
   response["hydra:member"].forEach((response) => {
     let articleList = document.getElementById("articles");
     let selectArticle = document.createElement("option");
@@ -58,12 +61,11 @@ getArticles();
 async function getArticleData() {
   sectionTags.innerHTML = null;
   sectionCategory.innerHTML = null;
-  const id = articleSelect.selectedIndex + 1;
+  const id = articleSelect.selectedIndex;
   const responseJSON = await fetch(articlesAPIURL + id);
   const response = await responseJSON.json();
 
   arrayTag = response.tags.map((e) => e.split("/")).map((e) => e[3]);
-  buttonTag.classList.toggle("hidden");
 
   arrayCategory = response.category.split("/");
   arrayCategory = arrayCategory[3];
@@ -188,22 +190,24 @@ function updateArticle() {
   const headers = {
     "Content-Type": "application/json",
   };
-
-  let requestBody = {
-    title: articleNameInput.value,
-    body: articleBodyInput.value,
-    tags: tagsArray,
-    category: "api/categories/" + category,
-    writer: "api/writers/" + writerSelect.value,
-    publishedAt: dateValue.value,
-  };
-  if (dateIsSaving.checked == false) {
+  let requestBody;
+  if (dateIsNotSaving.checked) {
     requestBody = {
       title: articleNameInput.value,
       body: articleBodyInput.value,
       tags: tagsArray,
       category: "api/categories/" + category,
       writer: "api/writers/" + writerSelect.value,
+      publishedAt: null,
+    };
+  } else {
+    requestBody = {
+      title: articleNameInput.value,
+      body: articleBodyInput.value,
+      tags: tagsArray,
+      category: "api/categories/" + category,
+      writer: "api/writers/" + writerSelect.value,
+      publishedAt: dateValue.value,
     };
   }
   fetch(articlesAPIURL + articleSelect.value, {
@@ -218,6 +222,7 @@ function updateArticle() {
       infoZoneDiv.textContent =
         "⚠ Une erreur est survenue lors de la modification de la catégorie";
     }
+    getArticleData();
   });
 }
 // event listener for "modifie cet article" button

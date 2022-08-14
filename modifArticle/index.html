@@ -22,7 +22,9 @@
         ><select
           id="articles"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg mb-2"
-        ></select>
+        >
+          <option value=""></option>
+        </select>
       </div>
       <hr class="mb-4" />
       <div>
@@ -56,7 +58,7 @@
       <button
         type="button"
         id="newTag"
-        class="hidden text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
+        class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
       >
         New tag
       </button>
@@ -77,16 +79,20 @@
       <select id="writer-select"></select>
     </section>
     <section id="dateSection">
-      <input type="checkbox" id="save" name="save" checked />
+      <input type="radio" id="save" name="save"/>
       <label for="save" class="mb-2 text-xl font-medium text-gray-900 pt-2"
         >Je souhaite enregistrer nouvelle date de publication</label
-      >
-      <br />
+        >
+        <br />
       <input
         type="date"
         id="dateSelect"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg mb-2"
-      />
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg mb-2 mt-2"
+      /><br />
+      <input type="radio" id="noSave" name="save"/>
+      <label for="noSave" class="mb-2 text-xl font-medium text-gray-900 pt-2"
+        >Je souhaite de ne pas publier cette article</label
+      >
     </section>
     <div class="pt-10">
       <button
