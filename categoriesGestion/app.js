@@ -21,7 +21,7 @@ async function getCategories() {
   }
 
 getCategories()
-console.log(categoryName)
+
 
  function categoryNamefuction(){
      console.log(categorieList.value)
