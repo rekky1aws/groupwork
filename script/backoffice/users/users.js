@@ -1,6 +1,5 @@
 const apiUrl = "https://localhost:8000"
 const usersList = document.querySelector('#users-list');
-const infoMessage = document.querySelector('#info-message');
 
 async function loadUsers () {
 	const response = await fetch(apiUrl + "/api/users");
@@ -10,50 +9,50 @@ async function loadUsers () {
 	users = responseJSON['hydra:member'];
 	console.log(users);
 
-	/*writers.forEach(async (element) => {
-		const userResponse = await fetch(apiUrl + writerJSON.user);
-		const userJSON = await userResponse.json();
+	users.forEach(async (element) => {
 
-		let authorDiv = document.createElement('div');
-		authorDiv.className = "author";
+		let userDiv = document.createElement('div');
+		userDiv.className = "user";
 
-		let authorInfos = document.createElement('div');
-		authorInfos.className = "author-infos";
+		let userInfos = document.createElement('div');
+		userInfos.className = "user-infos";
 
-		let authorId = document.createElement('div');
-		authorId.className = "author-id";
-		authorId.textContent = element.id;
+		let userId = document.createElement('div');
+		userId.className = "user-id";
+		userId.textContent = element.id;
 
-		let authorMail = document.createElement('div');
-		authorMail.className = "author-mail";
-		authorMail.textContent = userJSON.email;
+		let userMail = document.createElement('div');
+		userMail.className = "user-mail";
+		userMail.textContent = element.email;
 
-		let authorMenu = document.createElement('div');
-		authorMenu.className = "author-menu";
+		let userMenu = document.createElement('div');
+		userMenu.className = "user-menu";
 
 		let deleteButton = document.createElement('button');
-		deleteButton.className = "cliquable author-button author-delete";
+		deleteButton.className = "cliquable user-button user-delete";
 		deleteButton.textContent = "🗑";
-		deleteButton.addEventListener('click', deleteAuthor)
+		deleteButton.addEventListener('click', deleteUser)
 
 		let editButton = document.createElement('button');
-		editButton.className = "cliquable author-button author-edit";
+		editButton.className = "cliquable user-button user-edit";
 		editButton.textContent = "📝";
 		editButton.addEventListener('click', function () {
 			window.location.href = "./edit?id=" + element.id;
 		})
 
-		authorInfos.append(authorId, authorMail);
-		authorMenu.append(editButton, deleteButton)
-		authorDiv.append(authorInfos, authorMenu);
-		authorsList.append(authorDiv);
+		userInfos.append(userId, userMail);
+		userMenu.append(editButton, deleteButton)
+		userDiv.append(userInfos, userMenu);
+		usersList.append(userDiv);
 
-	});*/
+	});
 }
 
-/*async function deleteUser (event)
+async function deleteUser (event)
 {
-	const authorId = event.target.parentNode.parentNode.childNodes[0].childNodes[0].textContent;
+	/*const authorId = event.target.parentNode.parentNode.childNodes[0].childNodes[0].textContent;
+
+	console.log(authorId);
 
 	const confirmed = confirm("Êtes vous sur de vouloir supprimer cet auteur ?");
 	if(confirmed)
@@ -64,26 +63,17 @@ async function loadUsers () {
 
 		const responseJSON = await response.json();
 
-		if(response.status === 204) {
-			infoMessage.textContent = `L'Auteur n° ${authorId} a été supprimé`;
-			infoMessage.style.display = 'block';
-			infoMessage.style.borderColor = "seagreen";
-			infoMessage.style.color = "seagreen";
+		console.log(responseJSON);
 
+		if(response.status === 204) {
+			infoMessage.newMessage(`L'Auteur n° ${authorId} a été supprimé`, 'ok');
 		} else {
-			infoMessage.textContent = `Une erreur est survenue lors de la suppression de l'Auteur n° ${authorId}`;
-			infoMessage.style.display = 'block';
-			infoMessage.style.borderColor = "tomato";
-			infoMessage.style.color = "tomato";
-			console.error(responseJSON['hydra:description']);
+			infoMessage.newMessage(`Une erreur est survenue lors de la suppression de l'Auteur n° ${authorId}`, 'error');
 		}
 
 	} else {
-		infoMessage.textContent = `La suppression de l'Auteur n° ${authorId} a été annulée`;
-		infoMessage.style.display = 'block';
-		infoMessage.style.borderColor = "royalblue";
-		infoMessage.style.color = "royalblue";
-	}
-}*/
+		infoMessage.newMessage(`La suppression de l'Auteur n° ${authorId} a été annulée`, 'cancel');
+	}*/
+}
 
 loadUsers();

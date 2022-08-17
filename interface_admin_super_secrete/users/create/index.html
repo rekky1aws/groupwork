@@ -4,9 +4,35 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="/style/main.css">
-	<title>Création d'utilisateur</title>
+	<link rel="stylesheet" type="text/css" href="/style/users/userCreate.css">
+	<script type="text/javascript" src="/script/infosMessage.js" defer></script>
+	<script type="text/javascript" src="/script/backoffice/users/userCreate.js" defer></script>
+	<title>Création d'auteur</title>
 </head>
 <body>
-	<h1>Création d'utilisateur</h1>
+	<header>
+		<a href="./">Retourner à la liste des Auteurs</a>
+		<a href="/interface_admin_super_secrete/users/create/">Aller a la page pour créer un utilisateur</a>
+	</header>
+
+	<h1>Créer un utilisateur</h1>
+
+	<div class="form">
+		<div class="input-field">
+			<label for="mail">Email :</label>
+			<input type="mail" name="mail" id="mail">
+		</div>
+		<div class="input-field">
+			<label for="password">Mot de passe :</label>
+			<input type="password" name="password" id="password">
+		</div>
+		<div class="input-field">
+			<label for="confirm-password">Confirmer le mot de passe :</label>
+			<input type="password" name="confirm-password" id="confirm-password">
+		</div>
+		<button class="cliquable validate-button">Valider</button>
+	</div>
+
+	<div id="info-message"></div>
 </body>
 </html>
