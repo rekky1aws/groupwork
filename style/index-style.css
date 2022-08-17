@@ -1,0 +1,37 @@
+body {
+	margin: 0;
+	font-family: Helvetica, sans-serif;
+	background-color: #F9DEC9;
+}
+
+nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #852903;
+	padding: 1em;
+	font-size: 1.5em;
+	color: #FFF;
+}
+
+nav a {
+	color: #FFF;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+h1 {
+	padding: 0;
+	margin: 0;
+}
+
+li a {
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 1.5em;
+	color: #852903;
+}
+
+ul {
+	margin: 25px;
+}

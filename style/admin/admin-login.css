@@ -7,13 +7,15 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	background-color: #F9DEC9;
 }
 
 input {
-	padding: 5px 10px;
+	padding: 10px 15px;
 	border-radius: 25px;
 	border: 1px solid black;
 	font-size: 25px;
+	background-color: #ffecdd;
 }
 
 #fake-form div {
@@ -32,17 +34,27 @@ input {
 }
 
 #validate {
-	background-color: #AAFF88;
+	background-color: green;
+	color: #FFF;
 	border: none;
 	font-size: 25px;
 	margin: 25px;
 	border-radius: 25px;
 	padding: 10px;
 	font-weight: bold;
+	box-shadow: 0px 2px 5px 2px #852903;
 }
 
 #validate:active {
 	transform: scale(0.95);
-}#validate:hover {
+	box-shadow: none;
+}
+
+#validate:hover {
 	transform: scale(1.05);
+	box-shadow: 0px 1px 2px 1px #852903;
+}
+
+h2 {
+	color: #852903;
 }

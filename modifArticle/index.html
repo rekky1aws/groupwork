@@ -14,7 +14,6 @@
       <h1 id="pageTitle" class="text-6xl font-semibold mb-6">
         Modification d’une article
       </h1>
-      <pre id="infoZone"></pre>
     </header>
     <section id="main">
       <div>
@@ -23,7 +22,9 @@
         ><select
           id="articles"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg mb-2"
-        ></select>
+        >
+          <option value=""></option>
+        </select>
       </div>
       <hr class="mb-4" />
       <div>
@@ -78,12 +79,21 @@
       <select id="writer-select"></select>
     </section>
     <section id="dateSection">
-        <input type="checkbox" id="save" name="save" checked>
-        <label for="save" class="mb-2 text-xl font-medium text-gray-900 pt-2">Je souhaite enregistrer une date de publication</label>
-        <br>
-        <label for="articleDate" class="mb-2 text-xl font-medium text-gray-900 pt-2">date de publication de l'article</label>
-        <br>
-        <input type="datetime-local" id="dateSelect" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg mb-2">
+      <input type="radio" id="save" name="save"/>
+      <label for="save" class="mb-2 text-xl font-medium text-gray-900 pt-2"
+        >Je souhaite enregistrer une date de publication</label
+        >
+        <br />
+      <input
+        type="datetime-local"
+        id="dateSelect"
+        step="1"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg mb-2 mt-2"
+      /><br />
+      <input type="radio" id="noSave" name="save"/>
+      <label for="noSave" class="mb-2 text-xl font-medium text-gray-900 pt-2"
+        >Je souhaite de ne pas publier cette article</label
+      >
     </section>
     <div class="pt-10">
       <button
@@ -93,5 +103,6 @@
         Modifié article
       </button>
     </div>
+    <pre class="font-bold text-xl text-red-600" id="infoZone"></pre>
   </body>
 </html>
