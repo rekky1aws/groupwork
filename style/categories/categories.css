@@ -29,3 +29,15 @@ button {
 	font-size: 1.5em;
 	margin-top: 25px;
 }
+
+.new-category {
+	background-color: #DDFFDD;
+}
+
+option, select {
+	font-size: 1.25em;
+}
+
+input {
+	font-size: 1.25em;
+}

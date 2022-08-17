@@ -1,22 +1,29 @@
 const nameField = document.querySelector('#name');
 const categorieList = document.querySelector('#category-select');
-const infoMessage = document.querySelector('#info-message');
-const updateButton =document.querySelector("#update");
+const updateButton = document.querySelector("#update");
 
 let categoryName = [];
 
 async function getCategories() {
     nameField.value = '';
+    categorieList.innerHTML = null;
+
     const jsonResponse = await (fetch("https://127.0.0.1:8000/api/categories"));
     const response = await jsonResponse.json();
+    
+    let newCategory = document.createElement('option');
+    newCategory.className = 'new-category';
+    newCategory.textContent = 'Nouvelle Catégorie';
+    categorieList.append(newCategory);
+
     response['hydra:member'].forEach(response => {
 
-      let selectCategory = document.createElement('option');
-      selectCategory.innerHTML = `${response.id} : ${response.name}`;
-      selectCategory.name = response.name;
-      selectCategory.value = response.id;
-      categorieList.appendChild(selectCategory);
-      categoryName.push(response.name);
+        let selectCategory = document.createElement('option');
+        selectCategory.innerHTML = `${response.id} : ${response.name}`;
+        selectCategory.name = response.name;
+        selectCategory.value = response.id;
+        categorieList.appendChild(selectCategory);
+        categoryName.push(response.name);
   });
 }
 
@@ -56,24 +63,24 @@ async function updateCategorie()
             })
         });
 
-        if (jsonResponse.status == 200 ) {
-            infoMessage.innerHTML = "Categorie modifiée.";
-            infoMessage.style.display = "block";
-        } else if (jsonResponse.status == 201 ) {
-            infoMessage.innerHTML = "Categorie créé.";
-            infoMessage.style.display = "block";
-        } else {
-            infoMessage.innerHTML = "Une erreur est survenue.";
-            infoMessage.style.display = "block";
-            infoMessage.style.borderColor = 'tomato';
-            infoMessage.style.color = 'tomato';
+        switch(jsonResponse.status) {
+            case 200:
+                infoMessage.newMessage('Catégorie modifiée.', 'ok');
+                break;
+
+            case 201:
+                infoMessage.newMessage('Catégorie créée.', 'ok');
+                break;
+
+            default:
+                infoMessage.newMessage('Une erreur est survenue lors de la création de la catégorie.', 'error');
+                break;
         }
     } else {
-        infoMessage.innerHTML = "Impossible de créer un catégorie sans nom";
-        infoMessage.style.display = "block";
-        infoMessage.style.borderColor = 'tomato';
-        infoMessage.style.color = 'tomato';
+        infoMessage.newMessage('Impossible de créer une catégorie sans nom', 'error');
     }
+
+    getCategories();
 }
 
 getCategories();

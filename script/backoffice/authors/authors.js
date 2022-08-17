@@ -5,9 +5,7 @@ async function loadAuthors () {
 	const response = await fetch(apiUrl + "/api/writers");
 	const responseJSON = await response.json();
 
-
 	writers = responseJSON['hydra:member'];
-	console.log(writers);
 
 	writers.forEach(async (element) => {
 		const writerResponse = await fetch(apiUrl + element['@id']);
@@ -57,6 +55,8 @@ async function deleteAuthor (event)
 {
 	const authorId = event.target.parentNode.parentNode.childNodes[0].childNodes[0].textContent;
 
+	console.log(authorId);
+
 	const confirmed = confirm("Êtes vous sur de vouloir supprimer cet auteur ?");
 	if(confirmed)
 	{
@@ -65,6 +65,8 @@ async function deleteAuthor (event)
 		});
 
 		const responseJSON = await response.json();
+
+		console.log(responseJSON);
 
 		if(response.status === 204) {
 			infoMessage.newMessage(`L'Auteur n° ${authorId} a été supprimé`, 'ok');
