@@ -26,9 +26,9 @@ fetch(myJSON)
         i < Math.min(articleArr.length, 20);
         i++
       ) {
-        divArticles.innerHTML += `<div class="block  md:p-[22.3px] p-6 m-2 max-w-sm bg-[#830002] rounded-lg border border-gray-400 shadow-md hover:bg-stone-300">
-          <p class="mb-2 text-xl font-bold tracking-tight text-white">Titre : ${articleArr[i].title}</p>
-          <p class="mb-2 text-xl font-bold tracking-tight text-white">Date : ${articleArr[i].published_at}</p>
+        divArticles.innerHTML += `<div class="article">
+          <p class="article-infos">Titre : ${articleArr[i].title}</p>
+          <p class="article-infos">Date : ${articleArr[i].published_at}</p>
           </div>`;
       }
     }
