@@ -1,12 +1,12 @@
 body {
 	font-family: Helvetica, sans-serif;
 	margin: 0;
-	background-color: #FFEBF3;
+	background-color: #F9DEC9;
 }
 
 header {
-	background-color: #482936;
-	color: #FFEBF3;
+	background-color: #852903;
+	color: #F9DEC9;
 	padding: 25px;
 }
 
@@ -15,13 +15,13 @@ nav {
 }
 
 nav a {
-	background-color: #482936;
-	color: #FFEBF3;
+	background-color: #852903;
+	color: #F9DEC9;
 	padding: 10px 15px;
 	text-decoration: none;
 	transition: ease-in-out 0.2s;
 }
 
 nav a:hover {
-	background-color: #894E67;
+	background-color: #85290399;
 }

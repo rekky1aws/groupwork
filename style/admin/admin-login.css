@@ -42,7 +42,7 @@ input {
 	border-radius: 25px;
 	padding: 10px;
 	font-weight: bold;
-	box-shadow: 0px 2px 5px 2px #852903;
+	box-shadow: 0px 2px 5px 2px #85290355;
 }
 
 #validate:active {
@@ -52,7 +52,7 @@ input {
 
 #validate:hover {
 	transform: scale(1.05);
-	box-shadow: 0px 1px 2px 1px #852903;
+	box-shadow: 0px 1px 2px 1px #85290355;
 }
 
 h2 {

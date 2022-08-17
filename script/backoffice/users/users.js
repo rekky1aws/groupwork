@@ -1,18 +1,16 @@
 const apiUrl = "https://localhost:8000"
-const authorsList = document.querySelector('#authors-list');
+const usersList = document.querySelector('#users-list');
+const infoMessage = document.querySelector('#info-message');
 
-async function loadAuthors () {
-	const response = await fetch(apiUrl + "/api/writers");
+async function loadUsers () {
+	const response = await fetch(apiUrl + "/api/users");
 	const responseJSON = await response.json();
 
 
-	writers = responseJSON['hydra:member'];
-	console.log(writers);
+	users = responseJSON['hydra:member'];
+	console.log(users);
 
-	writers.forEach(async (element) => {
-		const writerResponse = await fetch(apiUrl + element['@id']);
-		const writerJSON = await writerResponse.json();
-
+	/*writers.forEach(async (element) => {
 		const userResponse = await fetch(apiUrl + writerJSON.user);
 		const userJSON = await userResponse.json();
 
@@ -50,10 +48,10 @@ async function loadAuthors () {
 		authorDiv.append(authorInfos, authorMenu);
 		authorsList.append(authorDiv);
 
-	});
+	});*/
 }
 
-async function deleteAuthor (event)
+/*async function deleteUser (event)
 {
 	const authorId = event.target.parentNode.parentNode.childNodes[0].childNodes[0].textContent;
 
@@ -67,14 +65,25 @@ async function deleteAuthor (event)
 		const responseJSON = await response.json();
 
 		if(response.status === 204) {
-			infoMessage.newMessage(`L'Auteur n° ${authorId} a été supprimé`, 'ok');
+			infoMessage.textContent = `L'Auteur n° ${authorId} a été supprimé`;
+			infoMessage.style.display = 'block';
+			infoMessage.style.borderColor = "seagreen";
+			infoMessage.style.color = "seagreen";
+
 		} else {
-			infoMessage.newMessage(`Une erreur est survenue lors de la suppression de l'Auteur n° ${authorId}`, 'error');
+			infoMessage.textContent = `Une erreur est survenue lors de la suppression de l'Auteur n° ${authorId}`;
+			infoMessage.style.display = 'block';
+			infoMessage.style.borderColor = "tomato";
+			infoMessage.style.color = "tomato";
+			console.error(responseJSON['hydra:description']);
 		}
 
 	} else {
-		infoMessage.newMessage(`La suppression de l'Auteur n° ${authorId} a été annulée`, 'cancel');
+		infoMessage.textContent = `La suppression de l'Auteur n° ${authorId} a été annulée`;
+		infoMessage.style.display = 'block';
+		infoMessage.style.borderColor = "royalblue";
+		infoMessage.style.color = "royalblue";
 	}
-}
+}*/
 
-loadAuthors();
+loadUsers();
