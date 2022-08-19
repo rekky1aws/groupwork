@@ -5,11 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="app.js" defer></script>
-
+    <link rel="stylesheet" type="text/css" href="/style/main.css">
+    <script type="text/javascript" src="/script/infosMessage.js" defer></script>
+    <script src="/script/backoffice/tags/tagsGestion.js" defer></script>
+    <title>Ajouter ou modifier un tag</title>
 </head>
 
 <body>
+    <header>
+        <a href="../interface.html">Retour a menu</a>
+    </header>
     <section>
         <select id="tags-select">
         <option>nouveau tag</option>
@@ -21,7 +26,7 @@
         </label>
     </section>
     <button id='update'>UPDATE</button>
-    <div id="info"></div>
+    <div id="info-message"></div>
 </body>
 
 </html>

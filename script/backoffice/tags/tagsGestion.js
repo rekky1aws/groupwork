@@ -1,11 +1,10 @@
 let nameField = document.getElementById('name');
 let tagList = document.getElementById('tags-select');
 let categoryName = [];
-let infoMessage = document.getElementById('info');
 
 async function getTags() {
     nameField.value = '';
-    const jsonResponse = await fetch("https://127.0.0.1:8000/api/tags");
+    const jsonResponse = await fetch("https://localhost:8000/api/tags");
     const response = await jsonResponse.json();
     response['hydra:member'].forEach(response => {
       
@@ -34,10 +33,11 @@ async function updateTag(){
     let APIURL = null;
     let HTTPMethod = null;
     if (tagList.value === 'nouveau tag') {
-        APIURL = 'https://127.0.0.1:8000/api/tags';
+        APIURL = 'https://localhost:8000/api/tags';
         HTTPMethod = 'POST';
     } else {
-        APIURL = 'https://127.0.0.1:8000/api/tags/' + (tagList.value);
+        APIURL = 'https://localhost:8000/api/tags/' + (tagList.value);
+        console.log(APIURL);
         HTTPMethod = 'PUT';
     }
     const JsonResponse = await fetch(APIURL, {
@@ -47,15 +47,15 @@ async function updateTag(){
         },
         body: JSON.stringify({
             name: nameField.value
-        })
+        });
     });
 
     if (JsonResponse.status == 200) {
-        infoMessage.innerHTML = "tag modifié";
+        infoMessage.newMessage("Tag modifié", 'ok');
     } else if (JsonResponse.status == 201) {
-        infoMessage.innerHTML = "Tag créé";
+        infoMessage.newMessage("Tag créé", 'ok');
     } else {
-        infoMessage.innerHTML = 'Une erreur est survenue';
+        infoMessage.newMessage('Une erreur est survenue', 'error');
     }
 }
 
