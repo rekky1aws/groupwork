@@ -75,7 +75,7 @@ async function deleteAuthor (event)
 		}
 
 	} else {
-		infoMessage(`La suppression de l'Auteur n° ${authorId} a été annulée`, 'cancel');
+		infoMessage.newMessage(`La suppression de l'Auteur n° ${authorId} a été annulée`, 'cancel');
 	}
 }
 
